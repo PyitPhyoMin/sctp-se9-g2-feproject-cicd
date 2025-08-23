@@ -115,9 +115,9 @@ workflows:
           filters:
             branches:
               only: release
-      # - deploy:
-      #     requires:
-      #       - publish
-      #     filters:
-      #       branches:
-      #         only: release
+      - deploy:
+          requires:
+            - publish
+          filters:
+            branches:
+              only: release

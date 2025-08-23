@@ -21,6 +21,7 @@ function HomePageView({ selectedProducts }) {
               <div className={styles.headerStyle}>
                 <section className={styles.sectionStyle}>
                   <div className={styles.titleStyle}>
+                    <div>This is the release branch update.</div>
                     <h2 className={styles.titleName}>Popular</h2>
                   </div>
                 </section>
