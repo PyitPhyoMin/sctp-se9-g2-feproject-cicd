@@ -47,12 +47,18 @@ jobs:
       - docker/check:
           docker-username: DOCKERHUB_LOGIN # DOCKER_LOGIN is the default value, if it exists, it automatically would be used.
           docker-password: DOCKERHUB_PASSWORD # DOCKER_PASSWORD is the default value
-      - docker/build:
-          image: $DOCKERHUB_LOGIN/theminimart
-          tag: latest,$CIRCLE_SHA1,v1.0.$CIRCLE_BUILD_NUM
+      # - docker/build:
+      #     image: $DOCKERHUB_LOGIN/theminimart
+      #     tag: latest
+      - run:
+          name: Build optimized Docker image
+          command: |
+            echo "Building optimized multi-stage Docker image..."
+            docker build --no-cache -t $DOCKERHUB_LOGIN/theminimart:latest .
+            echo "Image built successfully"
       - docker/push:
           image: $DOCKERHUB_LOGIN/theminimart
-          tag: latest,$CIRCLE_SHA1,v1.0.$CIRCLE_BUILD_NUM
+          tag: latest
 
   deploy:
     docker:
