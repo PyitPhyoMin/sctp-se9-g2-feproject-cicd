@@ -1,8 +1,8 @@
-FROM node:18-alpine
+FROM node:18-alpine AS builder
 
 WORKDIR /app
 
-ENV PORT=80
+# ENV PORT=80
 
 COPY ["package.json", "package-lock.json*", "./"]
 
@@ -10,4 +10,13 @@ RUN npm ci
 
 COPY . .
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
+RUN npm run build
+
+FROM nginx:alpine
+
+COPY --from=builder /app/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
