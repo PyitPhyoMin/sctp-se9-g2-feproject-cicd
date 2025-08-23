@@ -49,8 +49,10 @@ jobs:
           docker-password: DOCKERHUB_PASSWORD # DOCKER_PASSWORD is the default value
       - docker/build:
           image: $DOCKERHUB_LOGIN/theminimart
+          tag: latest,$CIRCLE_SHA1,v1.0.$CIRCLE_BUILD_NUM
       - docker/push:
           image: $DOCKERHUB_LOGIN/theminimart
+          tag: latest,$CIRCLE_SHA1,v1.0.$CIRCLE_BUILD_NUM
 
   deploy:
     docker:
@@ -113,9 +115,9 @@ workflows:
           filters:
             branches:
               only: release
-      - deploy:
-          requires:
-            - publish
-          filters:
-            branches:
-              only: release
+      # - deploy:
+      #     requires:
+      #       - publish
+      #     filters:
+      #       branches:
+      #         only: release
