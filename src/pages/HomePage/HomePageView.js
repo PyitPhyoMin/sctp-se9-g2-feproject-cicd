@@ -17,7 +17,6 @@ function HomePageView({ selectedProducts }) {
       {selectedProducts !== undefined && selectedProducts.length > 0 && (
         <section className={styles.sectionStyle}>
           <section>
-            <div>This is the release branch update.</div>
             <div>
               <div className={styles.headerStyle}>
                 <section className={styles.sectionStyle}>
